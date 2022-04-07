@@ -1,32 +1,32 @@
-// const precioOriginal = 120;
-// const descuento = 18;
+const precio = document.querySelector("#product_price");
+const descuento = document.querySelector("#product_discount");
+const result = document.querySelector("#resultado");
+const result_description = document.querySelector("#descripcion");
+const cupon_input = document.querySelector("#cupon");
+const CUPON = '$Pr3mio';
+const DESCUENTO_CUPON = 10;
 
+const priceWithDiscount = (precio, porcentaje) => {
+    let resultado = precio * (100 - porcentaje) / 100;
+    return resultado
+}
 
-function calcularPrecioConDescuento(precio, descuento) {
-    const porcentajePrecioConDescuento = 100 - descuento;
-    const precioConDescuento = (precio * porcentajePrecioConDescuento) / 100;
-  
-    return precioConDescuento;
-  }
-  
-  function onClickButtonPriceDiscount() {
-    const inputPrice = document.getElementById("InputPrice");
-    const priceValue = inputPrice.value;
-    
-    const inputDiscount = document.getElementById("InputDiscount");
-    const discountValue = inputDiscount.value;
-  
-    const precioConDescuento = calcularPrecioConDescuento(priceValue, discountValue);
-  
-    const resultP = document.getElementById("ResultP");
-    resultP.innerText = "El precio con descuento son: $" + precioConDescuento;
-  }
-  
-  
-  // console.log({
-  //   precioOriginal,
-  //   descuento,
-  //   porcentajePrecioConDescuento,
-  //   precioConDescuento,
-  // });
-  
+function calcularPrecio() {
+    let precio_value = Number(precio.value);
+    let discount_value = Number(descuento.value);
+    let user_cupon = cupon_input.value;
+    let resultado;
+    if(user_cupon === CUPON){
+        let descuento_extra = discount_value + DESCUENTO_CUPON;
+        resultado = priceWithDiscount(precio_value, descuento_extra)
+        result_description.innerHTML = `Se ha aplicado un descuento del ${descuento_extra}%. ${discount_value}% 
+        del descuento normal más ${DESCUENTO_CUPON}% del cupón`
+    }else {
+        resultado = priceWithDiscount(precio_value, discount_value);
+        result_description.innerHTML = 'El código de tu cupón no es válido'
+
+    }
+    result.innerHTML = `Precio: $${resultado}.`;
+    /* let resultado = priceWithDiscount(precio_value, discount_value);
+    result.innerHTML = `Precio: $${resultado}.`; */
+}

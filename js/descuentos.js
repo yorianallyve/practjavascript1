@@ -3,7 +3,7 @@ const descuento = document.querySelector("#product_discount");
 const result = document.querySelector("#resultado");
 const result_description = document.querySelector("#descripcion");
 const cupon_input = document.querySelector("#cupon");
-const CUPON = '$Pr3mio';
+const CUPON = '$Cupon2022';
 const DESCUENTO_CUPON = 10;
 
 const priceWithDiscount = (precio, porcentaje) => {
